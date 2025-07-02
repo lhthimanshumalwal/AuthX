@@ -1,0 +1,72 @@
+{
+  "name": "authx",
+  "version": "1.0.0",
+  "description": "A scalable and modular authentication system - Auth0 alternative",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "keywords": [
+    "authentication",
+    "authorization",
+    "auth0",
+    "jwt",
+    "oauth2",
+    "saml",
+    "ldap",
+    "passport",
+    "express",
+    "nodejs"
+  ],
+  "author": "AuthX Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "passport": "^0.7.0",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.3.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express-session": "^1.17.3",
+    "mongoose": "^8.0.3",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-github": "^1.1.0",
+    "passport-saml": "^3.2.4",
+    "passport-ldapauth": "^3.0.1",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "express-validator": "^7.0.1",
+    "nodemailer": "^6.9.7",
+    "speakeasy": "^2.0.0",
+    "qrcode": "^1.5.3",
+    "crypto": "^1.0.1",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
+    "morgan": "^1.10.0",
+    "connect-mongo": "^5.1.0",
+    "redis": "^4.6.10",
+    "ioredis": "^5.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "eslint": "^8.55.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
+
