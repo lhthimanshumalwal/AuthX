@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  authx:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/authx
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=your-production-jwt-secret-change-this
+      - SESSION_SECRET=your-production-session-secret-change-this
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - authx-network
+
+  mongo:
+    image: mongo:5
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=authx
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    networks:
+      - authx-network
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - authx-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - authx
+    restart: unless-stopped
+    networks:
+      - authx-network
+
+volumes:
+  mongo_data:
+  redis_data:
+
+networks:
+  authx-network:
+    driver: bridge
+
